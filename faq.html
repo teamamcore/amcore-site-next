@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FAQ — AmCore</title>
+    <meta name="description" content="Answers on offline work, data ownership, security, pricing, and what AmCore does and doesn't do.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,640&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="site.css">
+</head>
+<body>
+    <div class="lamp-field" aria-hidden="true"><div class="lamp"></div></div>
+    <header>
+        <a class="brand" href="index.html">
+            <img class="mark" src="https://amcore.test/images/brand/amcore-mark.png" alt="">
+            <p class="name">AmCore</p>
+        </a>
+        <nav class="topnav" aria-label="Pages">
+            <a href="operating-systems.html">Operating Systems</a>
+            <a href="trades.html">Trades</a>
+            <a href="websites.html">Websites</a>
+            <a href="how-we-work.html">How We Work</a>
+            <a href="about.html">About</a>
+            <a href="faq.html" aria-current="page">FAQ</a>
+        </nav>
+        <div class="end">
+            <span class="drafts">Local copy</span>
+            <div class="book"><a href="contact.html">Book a Discovery Call</a></div>
+        </div>
+    </header>
+    <main>
+        <section class="hero">
+            <h1>Questions from the shop.</h1>
+        </section>
+        <section>
+            <div class="faq-block">
+                <h2>System or data</h2>
+                <ul class="stack faq">
+                    <li>
+                        <h3><button type="button" class="ask" aria-expanded="false" aria-controls="faq-software">Who owns the software?</button></h3>
+                        <div class="answer" id="faq-software" hidden>
+                            <p>You do. Once the build is paid in full, you own the custom code we write for your business. You also get a permanent, royalty-free license to the AmCore components it needs to run. That means you or another developer can maintain and change it without us.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <h3><button type="button" class="ask" aria-expanded="false" aria-controls="faq-data">Who owns our data?</button></h3>
+                        <div class="answer" id="faq-data" hidden>
+                            <p>You do, including your pricing, rate sheets, and cost data. We store and process it only to run your system. We don't sell it, share it with other customers, use it for marketing, or use it to train AI.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <h3><button type="button" class="ask" aria-expanded="false" aria-controls="faq-stop">What if we decide to stop working with AmCore?</button></h3>
+                        <div class="answer" id="faq-stop" hidden>
+                            <p>You can choose not to renew by giving notice 30 days before your term ends. For 30 days after that, you can export your data, photos, documents, source code, and deployment documentation. If you want help moving to a new provider, we can agree on that in writing.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <h3><button type="button" class="ask" aria-expanded="false" aria-controls="faq-secure">Is it secure?</button></h3>
+                        <div class="answer" id="faq-secure" hidden>
+                            <p>Your data is encrypted in transit and at rest. It's hosted with providers that hold SOC 2 Type II reports, never on our own servers or personal devices. Your field, office, and admin users each get role-based access and sign in with passkeys or device biometrics. Our admin access requires multi-factor authentication. Critical security updates go in within two business days. If a security incident affects your data, we notify you within 72 hours.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <h3><button type="button" class="ask" aria-expanded="false" aria-controls="faq-dont-enter">Is there anything we shouldn't put in the system?</button></h3>
+                        <div class="answer" id="faq-dont-enter" hidden>
+                            <p>Yes. Don't enter card or bank account numbers, Social Security numbers, or medical information. The system isn't built for that kind of data.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <h3><button type="button" class="ask" aria-expanded="false" aria-controls="faq-ai">Do you use AI?</button></h3>
+                        <div class="answer" id="faq-ai" hidden>
+                            <p>Yes, for search, tagging, in-app help, and call transcription. Your data is never used to train AI models, and our AI providers aren't allowed to train on it either. Call audio is deleted within 30 days after it's transcribed. AI output can be wrong, so your team should review it before relying on it.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="faq-block">
+                <h2>System</h2>
+                <ul class="stack faq">
+                    <li>
+                        <h3><button type="button" class="ask" aria-expanded="false" aria-controls="faq-signal">What happens if we lose signal on a job?</button></h3>
+                        <div class="answer" id="faq-signal" hidden>
+                            <p>Keep working. Your crew can capture work order information offline, and it syncs when the connection comes back.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <h3><button type="button" class="ask" aria-expanded="false" aria-controls="faq-change">Do we have to change how we work?</button></h3>
+                        <div class="answer" id="faq-change" hidden>
+                            <p>No. The system is configured to your forms, your terms, and your process. We'll recommend ways to tighten what you already do. You make the business decisions.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <h3><button type="button" class="ask" aria-expanded="false" aria-controls="faq-paper">We're all on paper. Can you move us?</button></h3>
+                        <div class="answer" id="faq-paper" hidden>
+                            <p>Yes. Bring the paperwork you use today. We build the system around it and train your people in person.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <h3><button type="button" class="ask" aria-expanded="false" aria-controls="faq-books">We already use QuickBooks. What happens to it?</button></h3>
+                        <div class="answer" id="faq-books" hidden>
+                            <p>It stays. QuickBooks remains your system of record for accounting and payroll. The OS runs your jobs and syncs with QuickBooks.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <h3><button type="button" class="ask" aria-expanded="false" aria-controls="faq-after">Can we make changes after go-live?</button></h3>
+                        <div class="answer" id="faq-after" hidden>
+                            <p>Yes. Small adjustments are included every month. Larger changes, like new features or integrations, are scoped and priced in writing before any work starts.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <h3><button type="button" class="ask" aria-expanded="false" aria-controls="faq-setup">What's the setup process like?</button></h3>
+                        <div class="answer" id="faq-setup" hidden>
+                            <p>It starts in person, at your shop, with the owner, the field, and the office as separate conversations. See <a href="how-we-work.html">How We Work</a> for the stages.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="faq-block">
+                <ul class="stack faq">
+                    <li>
+                        <h3><button type="button" class="ask" aria-expanded="false" aria-controls="faq-seat">Do you charge by the seat?</button></h3>
+                        <div class="answer" id="faq-seat" hidden>
+                            <p>No. You pay one implementation fee and one flat monthly fee. Your plan includes a set number of users, and you can add more in small blocks. Customer texting and AI features are billed by usage. The monthly fee is fixed for your first year, and renewal increases are capped in your contract. <a href="contact.html">Book a discovery call</a> and we'll walk through what fits your shop.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <h3><button type="button" class="ask" aria-expanded="false" aria-controls="faq-monthly">What's included in the monthly fee?</button></h3>
+                        <div class="answer" id="faq-monthly" hidden>
+                            <ul class="included">
+                                <li>Hosting, maintenance, monitoring, and security updates</li>
+                                <li>Daily backups, stored in a separate location and kept for at least 30 days</li>
+                                <li>Support by phone and in the system, with round-the-clock response if the system goes down</li>
+                                <li>A monthly uptime commitment, with service credits applied automatically if we miss it</li>
+                                <li>A monthly service report</li>
+                                <li>Two hours a month of small changes, such as labels, terms, and report layouts</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3><button type="button" class="ask" aria-expanded="false" aria-controls="faq-dont">What don't you do?</button></h3>
+                        <div class="answer" id="faq-dont" hidden>
+                            <p>We're not IT support, and we don't set up or fix other companies' software. We don't give legal, tax, accounting, payroll, or employment advice. We're not consultants: we show you how the system supports your business, and you make the business decisions.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <h3><button type="button" class="ask" aria-expanded="false" aria-controls="faq-long">How long does it take to get up and running?</button></h3>
+                        <div class="answer" id="faq-long" hidden>
+                            <p>It depends on your business. We'll give you a real timeline on your discovery call.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <h3><button type="button" class="ask" aria-expanded="false" aria-controls="faq-trades">What trades do you work with?</button></h3>
+                        <div class="answer" id="faq-trades" hidden>
+                            <p>We start with plumbing, HVAC, electrical, painting and drywall, and roofing. Tile, flooring, or something else? If you can give us the time for a proper discovery, we can make it work.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <h3><button type="button" class="ask" aria-expanded="false" aria-controls="faq-sites">Do you build websites too?</button></h3>
+                        <div class="answer" id="faq-sites" hidden>
+                            <p>Yes. See the <a href="websites.html">Websites</a> page.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <section class="close">
+            <h2>See what it would look like for your shop.</h2>
+            <div class="book"><a href="contact.html">Book a Discovery Call</a></div>
+        </section>
+    </main>
+    <footer class="banner" id="site-banner">
+        <div class="banner-main">
+            <div class="banner-brand">
+                <a class="banner-logo" href="index.html">
+                    <img class="mark" src="https://amcore.test/images/brand/amcore-mark.png" alt="">
+                    <img class="wordmark" src="https://amcore.test/images/brand/amcore-wordmark.png" alt="AmCore">
+                </a>
+                <p>Operating systems for the trades. Built by tradesmen, run for you. Serving Greenville and the Upstate.</p>
+                <p>We also build fast, mobile-first websites for trades businesses.</p>
+                <a class="banner-go" href="websites.html">See Websites →</a>
+                <div class="social">
+                    <a href="#site-banner" aria-label="AmCore Systems on Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M14.5 8.5V6.2c0-.7.5-1 1.1-1H18V2h-2.6C12.6 2 11 3.7 11 6.1V8.5H8.5V12H11v10h3.5V12H17l.6-3.5h-3.1z"/></svg></a>
+                    <a href="#site-banner" aria-label="AmCore Systems on LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M5.7 8.7H2.9V21h2.8V8.7zM4.3 3C3.3 3 2.5 3.8 2.5 4.8S3.3 6.6 4.3 6.6 6.1 5.8 6.1 4.8 5.3 3 4.3 3zM21 21h-2.8v-6c0-1.8-.7-3-2.3-3-1.1 0-1.8.8-2.1 1.5-.1.3-.1.7-.1 1.1V21H11V8.7h2.7v1.7c.5-.8 1.6-2 3.6-2 2.6 0 4.7 1.7 4.7 5.4V21z"/></svg></a>
+                    <a href="#site-banner" aria-label="AmCore Systems on X"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M17.6 3h3l-6.6 7.5L22 21h-6.2l-4.8-6.3L5.7 21H2.6l7-8L2 3h6.3l4.4 5.8L17.6 3zm-1.1 16.2h1.7L7.5 4.7H5.7l10.8 14.5z"/></svg></a>
+                </div>
+            </div>
+            <nav class="banner-col" aria-label="Company">
+                <p class="banner-label">Company</p>
+                <a href="operating-systems.html">Operating Systems</a>
+                <a href="trades.html">Trades</a>
+                <a href="websites.html">Websites</a>
+                <a href="how-we-work.html">How We Work</a>
+                <a href="about.html">About</a>
+                <a href="faq.html" aria-current="page">FAQ</a>
+            </nav>
+            <nav class="banner-col" aria-label="Legal">
+                <p class="banner-label">Legal</p>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Use</a>
+                <a href="contact.html">Contact</a>
+                <a href="contact.html">Hiring</a>
+            </nav>
+        </div>
+        <p class="banner-copy">© 2026 AmCore Systems LLC. Greenville, SC.</p>
+    </footer>
+    <script src="faq.js"></script>
+</body>
+</html>

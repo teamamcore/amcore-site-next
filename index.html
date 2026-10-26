@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AmCore — The crew went home</title>
+    <meta name="description" content="The crew went home. You're still at the desk. The estimate, the job, and the invoice live in different places, and you are the one who pulls them together.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,640&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #e4e7ee;
+            --ink: #1b2433;
+            --muted: #4d5968;
+            --r1: #7d8b9c;
+            --r2: #4d5968;
+            --r3: #1b2433;
+            --r4: #8c3a32;
+        }
+        * { box-sizing: border-box; }
+        html { scroll-snap-type: y mandatory; }
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--ink);
+            font-family: "Bricolage Grotesque", "Avenir Next", sans-serif;
+            font-size: 1.2rem;
+            line-height: 1.35;
+        }
+        a { color: inherit; }
+        a:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 3;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.5rem;
+            padding: 1.2rem 1.5rem;
+        }
+        header a.brand { display: flex; align-items: center; gap: 0.7rem; text-decoration: none; flex: none; }
+        .topnav {
+            display: flex;
+            flex: 1;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.35rem 1.15rem;
+        }
+        .topnav a {
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 640;
+            letter-spacing: -0.02em;
+        }
+        .topnav a:hover,
+        .topnav a:focus-visible { text-decoration: underline; text-underline-offset: 0.22em; }
+        .end { display: flex; align-items: center; gap: 1.25rem; flex: none; }
+        header .drafts { color: var(--muted); font-size: 0.85rem; text-decoration: none; }
+        .book {
+            display: inline-flex;
+            align-self: flex-start;
+        }
+        .book a,
+        .book button {
+            display: inline-block;
+            border-radius: 0.55rem;
+            padding: 0.75rem 1.2rem;
+            background: var(--ink);
+            color: var(--bg);
+            text-decoration: none;
+            font-weight: 640;
+            font-size: 0.95rem;
+            border: 0;
+            cursor: pointer;
+            font-family: inherit;
+            transition: background 0.15s ease, color 0.15s ease, transform 0.15s ease;
+        }
+        .book a {
+            background: #a6372f;
+            color: #f4f1ea;
+        }
+        .book a:hover,
+        .book button:hover,
+        .book a:focus-visible,
+        .book button:focus-visible {
+            background: #d6453a;
+            color: #fff8f4;
+            transform: translateY(-3px) scale(1.06);
+            filter: none;
+        }
+
+        .mark { height: 34px; width: auto; }
+        .name { margin: 0; font-weight: 640; letter-spacing: -0.03em; font-size: 1.15rem; }
+        section {
+            position: relative;
+            min-height: 100vh;
+            scroll-snap-align: start;
+            scroll-snap-stop: always;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 5.5rem 7vw;
+        }
+        /* Screen numbers stay for review. Remove .count before the live deployment. */
+        .count {
+            margin: 0 0 1rem;
+            color: var(--muted);
+            font-size: 0.8rem;
+            letter-spacing: 0.14em;
+        }
+        section.close h1 { line-height: 1.08; }
+        section.close .book { margin-top: 2.75rem; }
+        h1.pile { max-width: 16ch; font-size: clamp(2.4rem, 5.4vw, 4.4rem); }
+        h1.logo { max-width: 12ch; }
+        h1.logo a { color: #a6372f; text-decoration: none; }
+        h1.logo a:hover,
+        h1.logo a:focus-visible { color: #d6453a; text-decoration: underline; text-underline-offset: 0.08em; }
+        h1.trades { max-width: 18ch; }
+        h1.trades .trades-line { display: inline-flex; align-items: center; gap: 0.45em; }
+        h1.trades small {
+            font-size: 0.32em;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            line-height: 1.15;
+            max-width: 8em;
+        }
+        h1 {
+            margin: 0;
+            max-width: 14ch;
+            font-size: clamp(3rem, 7.2vw, 6.4rem);
+            font-weight: 500;
+            letter-spacing: -0.045em;
+            line-height: 0.92;
+        }
+        .stack { margin: 0; max-width: 24rem; }
+        .stack p {
+            margin: 0 0 0.85rem;
+            font-size: clamp(1.5rem, 3vw, 2.15rem);
+            font-weight: 500;
+            letter-spacing: -0.03em;
+        }
+        .sub {
+            max-width: 32rem;
+            margin: 1.2rem 0 0;
+            color: var(--muted);
+            font-size: 1.3rem;
+        }
+        .sub.ink { color: var(--ink); }
+        .flow { margin: 1.4rem 0 0; padding: 0; list-style: none; }
+        .flow li {
+            margin: 0;
+            padding: 0.3rem 0;
+            font-size: clamp(1.45rem, 2.6vw, 1.9rem);
+            font-weight: 500;
+            letter-spacing: -0.03em;
+        }
+        figure.shot { margin: 0; max-width: 880px; }
+        figure.shot img {
+            display: block;
+            width: 100%;
+            height: min(34vh, 360px);
+            object-fit: cover;
+        }
+        figcaption {
+            margin-top: 1rem;
+            max-width: 22ch;
+            font-size: clamp(1.8rem, 4vw, 3.1rem);
+            font-weight: 500;
+            letter-spacing: -0.04em;
+            line-height: 1.02;
+        }
+        .rise p:nth-child(1) { color: var(--r1); }
+        .rise p:nth-child(2) { color: var(--r2); }
+        .rise p:nth-child(3) { color: var(--r3); }
+        .rise p:last-child { color: var(--r4); }
+        figcaption span {
+            display: block;
+            max-width: 36rem;
+            margin-top: 0.7rem;
+            color: var(--muted);
+            font-size: 1.2rem;
+            letter-spacing: 0;
+            font-weight: 500;
+        }
+        .links { margin-top: 1.4rem; }
+        .links a { text-decoration: underline; text-underline-offset: 3px; }
+        h1.invite {
+            max-width: 15ch;
+            font-size: clamp(2.5rem, 5.6vw, 4.6rem);
+            line-height: 1.02;
+        }
+        .down {
+            display: inline-flex;
+            margin-top: 0.85rem;
+            color: var(--ink);
+            text-decoration: none;
+        }
+        .down svg {
+            width: 4.4rem;
+            height: 4.4rem;
+            animation: point-down 0.85s cubic-bezier(0.45, 0, 0.2, 1) infinite;
+        }
+        .down:hover svg,
+        .down:focus-visible svg { animation: none; transform: translateY(2rem) scale(1.2); }
+        @keyframes point-down {
+            0% { transform: translateY(0) scale(1); }
+            40% { transform: translateY(1.85rem) scale(1.22); }
+            62% { transform: translateY(1.85rem) scale(1.22); }
+            100% { transform: translateY(0) scale(1); }
+        }
+        footer.banner {
+            position: relative;
+            z-index: 1;
+            background: #d8dce4;
+            color: var(--ink);
+            scroll-snap-align: end;
+        }
+        .banner-main {
+            display: grid;
+            grid-template-columns: 1.45fr 0.7fr 0.7fr;
+            gap: 2.4rem 3rem;
+            max-width: 68rem;
+            padding: 3.25rem 7vw 2.5rem;
+        }
+        .banner-logo { display: inline-flex; align-items: center; gap: 0.55rem; text-decoration: none; }
+        .banner-logo .mark { height: 36px; }
+        .banner-logo .wordmark { height: 18px; width: auto; }
+        .banner-brand p {
+            max-width: 28rem;
+            margin: 0.95rem 0 0;
+            color: var(--muted);
+            font-size: 0.98rem;
+            font-weight: 500;
+            line-height: 1.45;
+        }
+        .banner-go {
+            display: inline-block;
+            margin-top: 0.9rem;
+            color: #a6372f;
+            font-size: 0.98rem;
+            font-weight: 640;
+            letter-spacing: -0.02em;
+            text-decoration: none;
+        }
+        .banner-go:hover, .banner-go:focus-visible { color: #d6453a; }
+        .social { display: flex; align-items: center; gap: 0.95rem; margin-top: 1.35rem; }
+        .social a { display: inline-flex; color: color-mix(in srgb, var(--ink) 55%, transparent); text-decoration: none; }
+        .social a:hover, .social a:focus-visible { color: #a6372f; }
+        .social svg { display: block; width: 1.2rem; height: 1.2rem; }
+        .banner-col { display: flex; flex-direction: column; align-items: flex-start; gap: 0.55rem; }
+        .banner-label {
+            margin: 0 0 0.35rem;
+            color: var(--muted);
+            font-size: 0.72rem;
+            font-weight: 640;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+        }
+        .banner-col a {
+            color: var(--ink);
+            font-size: 0.98rem;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+            text-decoration: none;
+        }
+        .banner-col a:hover, .banner-col a:focus-visible { color: #a6372f; }
+        .banner-copy {
+            margin: 0;
+            border-top: 1px solid color-mix(in srgb, var(--ink) 12%, transparent);
+            padding: 1.15rem 7vw 1.4rem;
+            color: var(--muted);
+            font-size: 0.82rem;
+            font-weight: 500;
+            text-align: center;
+        }
+        @media (max-width: 700px) {
+            section {
+                justify-content: center;
+                padding: 4.5rem 1.35rem 5.5rem;
+            }
+            header { flex-wrap: wrap; align-items: flex-start; }
+            header .drafts { display: none; }
+            .end { margin-left: auto; }
+            .topnav { flex: 1 0 100%; order: 3; justify-content: flex-start; }
+            .banner-main { grid-template-columns: 1fr; padding-left: 1.35rem; padding-right: 1.35rem; }
+            .banner-copy { padding-left: 1.35rem; padding-right: 1.35rem; }
+        }
+        .lamp-field {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        .lamp {
+            position: absolute;
+            width: 78vmax;
+            height: 78vmax;
+            left: 24%;
+            top: 22%;
+            border-radius: 50%;
+            transform: translate(-40%, -35%);
+            background: radial-gradient(
+                circle,
+                color-mix(in srgb, white 36%, var(--bg)) 0%,
+                color-mix(in srgb, white 14%, var(--bg)) 36%,
+                transparent 70%
+            );
+            transition: left 1.15s ease, top 1.15s ease;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-snap-type: none; }
+            .lamp { transition: none; }
+            .down svg { animation: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="lamp-field" aria-hidden="true"><div class="lamp"></div></div>
+    <header>
+        <a class="brand" href="index.html">
+            <img class="mark" src="https://amcore.test/images/brand/amcore-mark.png" alt="">
+            <p class="name">AmCore</p>
+        </a>
+        <nav class="topnav" aria-label="Pages">
+            <a href="operating-systems.html">Operating Systems</a>
+            <a href="trades.html">Trades</a>
+            <a href="websites.html">Websites</a>
+            <a href="how-we-work.html">How We Work</a>
+            <a href="about.html">About</a>
+            <a href="faq.html">FAQ</a>
+        </nav>
+        <div class="end">
+            <span class="drafts">Local copy</span>
+            <div class="book">
+                <a href="contact.html">Book a Discovery Call</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="invite">
+        <p class="count">00</p>
+        <h1 class="invite">Business owners,<br>does this sound familiar?</h1>
+        <a class="down" href="#screen-01" aria-label="Scroll down">
+            <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
+                <path d="M24 6v30M8 24l16 16 16-16" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </a>
+    </section>
+
+    <section id="screen-01">
+        <p class="count">01</p>
+        <h1>The crew went home.</h1>
+    </section>
+
+    <section>
+        <p class="count">02</p>
+        <h1>You're still at the desk.</h1>
+    </section>
+
+    <section>
+        <p class="count">03</p>
+        <h1 class="pile">Stuck behind a pile of papers, work orders, estimates, invoices, receipts.</h1>
+    </section>
+
+    <section>
+        <p class="count">04</p>
+        <div class="stack rise">
+            <p>The job is done.</p>
+            <p>The customer is happy.</p>
+            <p>You're still buried.</p>
+        </div>
+    </section>
+
+    <section>
+        <p class="count">05</p>
+        <h1 class="logo"><a href="contact.html">It doesn't have to be this way.</a></h1>
+    </section>
+
+    <section>
+        <p class="count">06</p>
+        <h1>One place for the whole job.</h1>
+        <p class="sub">Built around the way your shop already works.</p>
+        <ol class="flow">
+            <li>The call</li>
+            <li>The work order</li>
+            <li>The crew on site</li>
+            <li>The invoice, the day the job is done</li>
+        </ol>
+        <p class="sub">Your steps, your order. <a href="how-we-work.html">How we work</a></p>
+    </section>
+
+    <section>
+        <p class="count">07</p>
+        <h1>The crew sees the job from the truck.</h1>
+        <p class="sub ink">Hours and photos get logged while the work happens.</p>
+        <p class="sub ink">A job can't be invoiced half-finished.</p>
+    </section>
+
+    <section>
+        <p class="count">08</p>
+        <h1 class="trades">We work with all <span class="trades-line">trades <small>and most small businesses too</small></span></h1>
+        <p class="sub">If you run crews and jobs, we build it around yours.</p>
+    </section>
+
+    <section>
+        <p class="count">09</p>
+        <h1>We come to your shop in Greenville.</h1>
+        <p class="sub ink">Discovery. Then we build it around that work. Then we keep it running.</p>
+        <p class="sub ink">One setup fee. One monthly fee. No per-user fees.</p>
+        <p class="sub">A site for the shop comes with it.</p>
+    </section>
+
+    <section>
+        <p class="count">10</p>
+        <h1>Built by people who have done the work.</h1>
+        <p class="sub">Paint and drywall. Plumbing. Crawlspaces. And the paperwork after the crew goes home.</p>
+        <p class="links"><a href="about.html">About us</a></p>
+    </section>
+
+    <section class="close">
+        <p class="count">11</p>
+        <h1>See what it would look like for your shop.</h1>
+        <div class="book">
+            <a href="contact.html">Book a Discovery Call</a>
+        </div>
+    </section>
+
+    <footer class="banner" id="site-banner">
+        <div class="banner-main">
+            <div class="banner-brand">
+                <a class="banner-logo" href="index.html">
+                    <img class="mark" src="https://amcore.test/images/brand/amcore-mark.png" alt="">
+                    <img class="wordmark" src="https://amcore.test/images/brand/amcore-wordmark.png" alt="AmCore">
+                </a>
+                <p>Operating systems for the trades. Built by tradesmen, run for you. Serving Greenville and the Upstate.</p>
+                <p>We also build fast, mobile-first websites for trades businesses.</p>
+                <a class="banner-go" href="websites.html">See Websites →</a>
+                <div class="social">
+                    <a href="#site-banner" aria-label="AmCore Systems on Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M14.5 8.5V6.2c0-.7.5-1 1.1-1H18V2h-2.6C12.6 2 11 3.7 11 6.1V8.5H8.5V12H11v10h3.5V12H17l.6-3.5h-3.1z"/></svg></a>
+                    <a href="#site-banner" aria-label="AmCore Systems on LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M5.7 8.7H2.9V21h2.8V8.7zM4.3 3C3.3 3 2.5 3.8 2.5 4.8S3.3 6.6 4.3 6.6 6.1 5.8 6.1 4.8 5.3 3 4.3 3zM21 21h-2.8v-6c0-1.8-.7-3-2.3-3-1.1 0-1.8.8-2.1 1.5-.1.3-.1.7-.1 1.1V21H11V8.7h2.7v1.7c.5-.8 1.6-2 3.6-2 2.6 0 4.7 1.7 4.7 5.4V21z"/></svg></a>
+                    <a href="#site-banner" aria-label="AmCore Systems on X"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M17.6 3h3l-6.6 7.5L22 21h-6.2l-4.8-6.3L5.7 21H2.6l7-8L2 3h6.3l4.4 5.8L17.6 3zm-1.1 16.2h1.7L7.5 4.7H5.7l10.8 14.5z"/></svg></a>
+                </div>
+            </div>
+            <nav class="banner-col" aria-label="Company">
+                <p class="banner-label">Company</p>
+                <a href="operating-systems.html">Operating Systems</a>
+                <a href="trades.html">Trades</a>
+                <a href="websites.html">Websites</a>
+                <a href="how-we-work.html">How We Work</a>
+                <a href="about.html">About</a>
+                <a href="faq.html">FAQ</a>
+            </nav>
+            <nav class="banner-col" aria-label="Legal">
+                <p class="banner-label">Legal</p>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Use</a>
+                <a href="contact.html">Contact</a>
+                <a href="contact.html">Hiring</a>
+            </nav>
+        </div>
+        <p class="banner-copy">© 2026 AmCore Systems LLC. Greenville, SC.</p>
+    </footer>
+
+    <script>
+        const lamp = document.querySelector('.lamp');
+        const sections = [...document.querySelectorAll('section')];
+        const desk = [
+            ['34%', '44%'],
+            ['22%', '48%'], ['62%', '42%'], ['28%', '54%'], ['70%', '46%'],
+            ['36%', '50%'], ['18%', '44%'], ['58%', '52%'], ['26%', '46%'],
+            ['66%', '50%'], ['20%', '56%'], ['44%', '48%']
+        ];
+        const phone = [
+            ['46%', '42%'],
+            ['32%', '46%'], ['66%', '42%'], ['38%', '52%'], ['70%', '48%'],
+            ['44%', '50%'], ['28%', '44%'], ['64%', '54%'], ['36%', '46%'],
+            ['68%', '50%'], ['30%', '56%'], ['50%', '48%']
+        ];
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+        const placeLamp = (index) => {
+            if (reduceMotion.matches) return;
+            const narrow = window.matchMedia('(max-width: 700px)').matches;
+            const [x, y] = (narrow ? phone : desk)[index] || desk[0];
+            lamp.style.left = x;
+            lamp.style.top = y;
+        };
+        const seen = new IntersectionObserver((entries) => {
+            const current = entries
+                .filter((entry) => entry.isIntersecting)
+                .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+            if (!current) return;
+            placeLamp(sections.indexOf(current.target));
+        }, { threshold: [0.6] });
+        sections.forEach((section) => seen.observe(section));
+        placeLamp(0);
+    </script>
+    <script src="auto.js"></script>
+</body>
+</html>
